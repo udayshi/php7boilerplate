@@ -1,0 +1,5 @@
+.idea/*
+app/var/*
+app/cache/*
+app/vendor/*
+app/supervisord*

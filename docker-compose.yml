@@ -1,0 +1,21 @@
+web:
+  build: ./docker
+  #image: udaysh/php7_1
+  labels:
+    - "com.lowecloud.proxy=php7skel.docker"
+
+  env_file:
+    - ".env"
+  environment:
+    - "dev=true"
+  volumes:
+    - "./app/:/app"
+    - "./docker/bin/:/userinit/"
+
+  links:
+     - "db:db"
+
+db:
+  image: mariadb:10
+  env_file:
+    - ".env"

@@ -1,0 +1,39 @@
+FROM php:7.1-fpm-alpine
+MAINTAINER shiuday@gmail.com
+
+RUN apk upgrade --update && apk --no-cache add \
+            curl \
+            vim \
+            bash \
+            git \
+            wget \
+            supervisor \
+            nginx
+
+RUN docker-php-ext-install mysqli && \
+    docker-php-ext-install pdo_mysql
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    curl -LsS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit && \
+chmod +x /usr/local/bin/phpunit
+
+# Cleaning up
+RUN rm -rf /usr/local/src /tmp/* /usr/share/man /var/cache/apk/*
+
+# Configure nginx
+COPY config/nginx.conf /etc/nginx/nginx.conf
+# Configure PHP-FPM
+COPY config/fpm-pool.conf /usr/local/etc/php-fpm.d/fpm-pool_custom.conf
+COPY config/php.ini /usr/local/etc/php/php.ini
+
+# Configure supervisord
+COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Add application
+RUN mkdir -p /app
+# composer create-project symfony/website-skeleton app
+WORKDIR /app
+#COPY src/ /app
+#composer install
+EXPOSE 80 443
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
