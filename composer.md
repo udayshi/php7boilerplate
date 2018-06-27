@@ -1,28 +1,31 @@
+## URL
 packagist.org
+
+## Init
 composer init
 
-#Searching package
+### Searching package
 composer search packagename@package version
 
-#Installing packages
+### Installing packages
 composer require packagename
 
-#If we have only composer.json
+### If we have only composer.json
 composer install
 
 
-#Update all the packages and change the lock file.
+### Update all the packages and change the lock file.
 composer update
 
-#Installing development package
+### Installing development package
 composer require --dev packagename
 
-#dumping autoload
+### dumping autoload
 composer dumpautoload
 
 
-#removing package from composer
+### removing package from composer
 composer remove packagename
 
-#Creating project
+### Creating project
 composer create-project packagename foldername
