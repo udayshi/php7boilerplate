@@ -3,3 +3,6 @@ app/var/*
 app/cache/*
 app/vendor/*
 app/supervisord*
+node_modules/*
+app/public/css/*
+app/public/js/*
