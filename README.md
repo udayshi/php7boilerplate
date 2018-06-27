@@ -60,6 +60,30 @@ Whenever you change file inside docker/ folder always build the container.
 ```
 docker-compose up --build
 ```
+
+### Front End (ES6 and SCSS)
+#### Install
+Make sure you have npm.
+To install frontend just run
+```
+npm i
+```
+#### ES6
+ES6 MAIN : es6/app.js and will build bundle at public/js
+
+#### SCSS
+SCSS MAIN: scss/main.scss and will build bundle at public/css
+
+#### Compile
+```
+npm run build
+npm run dev
+```
+
+
+
+
+
  
  
 #Good Luck
