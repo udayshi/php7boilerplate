@@ -2,7 +2,7 @@
 CUR_DIR=`pwd`
 BASE_NAME=`basename $CUR_DIR |sed 's/_//g'`
 container=${1}
-if [ "$1" = "" ]; then
+if [ "$#" -eq 0 ]; then
     container=web
 elif [ "$1" == "mysql" ]; then
    container=db
