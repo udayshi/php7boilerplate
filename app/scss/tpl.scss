@@ -3,6 +3,7 @@
 /*NOTE: use colon : to assign variable*/
 
 /*var example*/
+$env='dev';
 $var_color_scss:red;
 $var_trasparent_color:rgba($var_color_scss,.7);
 $var_darken_color:darken($var_color_scss,10%);
@@ -13,11 +14,20 @@ $var_hue_color:adjust-hue( $var_color_scss, 10% );
 $var_tint_color:tint($var_color_scss,10%);
 $var_shade_color:shade($var_color_scss,10%);
 
+/*If else */
+@if $env==dev{
+  $env_color:brown;
+}@else if $env==staging{
+  $env_color:yellow;
+}@else{
+  $env_color:green;
 
+}
 
 
 /*Calculated Var  can use +, -, *, /, and % */
 $var_calculated_width:300px / 960px * 100%;
+
 
 
 /*Mixins or Function*/
@@ -48,7 +58,13 @@ ul{
     @include mixin_tpl(10);
     @extend %shared-property;
     @extend %shared-selector;
+    a{
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
+
 }
 
 
