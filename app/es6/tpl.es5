@@ -1,0 +1,3 @@
+var lib_es5 = require('./tpl.module.es5');
+console.log(lib_es5.hello());
+

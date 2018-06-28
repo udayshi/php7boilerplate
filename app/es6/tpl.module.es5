@@ -1,0 +1,7 @@
+ function hello(){
+    return 'Hello from es5';
+ }
+
+ module.exports = {
+    hello: hello
+ };

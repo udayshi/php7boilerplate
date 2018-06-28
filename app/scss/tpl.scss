@@ -1,10 +1,54 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #333;
+/*Importing Partials*/
+@import "partial_reset";
+/*NOTE: use colon : to assign variable*/
 
-body {
-  font: 100% $font-stack;
-  color: $primary-color;
+/*var example*/
+$var_color_scss:red;
+$var_trasparent_color:rgba($var_color_scss,.7);
+$var_darken_color:darken($var_color_scss,10%);
+$var_lighten_color:lighten($var_color_scss,10%);
+$var_saturate_color:saturate( $var_color_scss, 10% );
+$var_desaturate_color:desaturate( $var_color_scss, 10% );
+$var_hue_color:adjust-hue( $var_color_scss, 10% );
+$var_tint_color:tint($var_color_scss,10%);
+$var_shade_color:shade($var_color_scss,10%);
+
+
+
+
+/*Calculated Var  can use +, -, *, /, and % */
+$var_calculated_width:300px / 960px * 100%;
+
+
+/*Mixins or Function*/
+@mixin mixin_tpl($arg) {
+    font-size:$arg;
+    font-weight: bold;
 }
-h1{
-  color:red;
+/*Shared Selector and Property  Extend/Inheritance */
+%shared-property {
+    border: 1px solid #ccc;
+  /*@extend %shared-property;*/
 }
+%shared-selector {
+  span{
+    background: $var_color_scss;
+  }
+  /*@extend %shared-selector;*/
+
+}
+
+/*Nesting Example*/
+ul{
+  width: $var_calculated_width;
+  li{
+    color:$var_color_scss;
+
+    /*Will include fontsize on param and makes font bold*/
+    @include mixin_tpl(10);
+    @extend %shared-property;
+    @extend %shared-selector;
+  }
+}
+
+
