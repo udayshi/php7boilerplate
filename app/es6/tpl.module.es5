@@ -5,3 +5,9 @@
  module.exports = {
     hello: hello
  };
+/*
+module.exports = 1;
+module.exports = { foo: 'bar' };
+module.exports = ['foo', 'bar'];
+module.exports = function bar () {};
+*/
