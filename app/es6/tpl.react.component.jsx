@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 class DumbComp extends React.Component {
     reportParent(e){
-        this.props.cb(this.props.data.name);
+        this.props.cb(this.props.name);
     }
 
-    render=()=> <li onClick={this.reportParent.bind(this)}>{this.props.data.name} - {this.props.data.age} </li>
+    render=()=> <li onClick={this.reportParent.bind(this)}>{this.props.name} - {this.props.age} </li>
 }
 
 class HelloWorld extends React.Component {
@@ -59,8 +59,8 @@ class HelloWorld extends React.Component {
         data.push({name:'Sabi',age:30});
         data.push({name:'Anu',age:12});
         data.push({name:'Aru',age:12});
-
-        const fm=data.map((r,i)=><DumbComp key={'fm_'+i} data={r} cb={this.childRead.bind(this)}/>)
+        //spread passing
+        const fm=data.map((r,i)=><DumbComp key={'fm_'+i} {...r} cb={this.childRead.bind(this)}/>)
 
         const json_out=this.state.data.map((r,i)=><li key={'json_out_'+i} >{r.first_name} - {r.last_name}</li>)
         return (
