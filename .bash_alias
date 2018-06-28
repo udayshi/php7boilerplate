@@ -1,0 +1,8 @@
+alias ecr_login="aws ecr get-login --no-include-email | sh"
+alias ecr_login_west2="aws ecr get-login --no-include-email --region us-west-2 | sh"
+alias dinghy_env=" eval $(dinghy env)"
+alias gl='git log -50 --pretty="%h | %s  changed by %aN around %ar "'
+alias gls='git log -50 --pretty="%h | %s  changed by %aN around %ar %n %% %n " --stat'
+alias gc='git commit'
+alias gp='git push'
+alias python='python3'
