@@ -73,7 +73,8 @@ if(false)
 /****Destructring****/
 let my_struct=[3,4];
 let a,b=my_struct;
-console.log('Struct',a,b);
+if(false)
+    console.log('Struct',a,b);
 /****************************/
 /**Generators**/
 import 'babel-polyfill';
@@ -136,7 +137,8 @@ var myMap = new Map();
 myMap.set('first_name','uday');
 myMap.set('last_name','shiwakoti');
 myMap.set('kids',['Anu','Aru'])
-console.log(myMap.get('kids'));
+if(false)
+    console.log(myMap.get('kids'));
 /****************************/
 
 

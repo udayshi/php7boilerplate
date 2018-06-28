@@ -1,3 +1,12 @@
-<?php
+<html>
+<head>
+    <title>Scaffold</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="applet_content">
 
-phpinfo();
+    </div>
+</body>
+<script src="js/main.min.js"></script>
+</html>

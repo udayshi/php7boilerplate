@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
-    entry: ['./app/es6/app.js'/*Add multiple file to compile*/,'./app/scss/main.scss'],
+    entry: ['babel-polyfill','./app/es6/app.js'/*Add multiple file to compile*/,'./app/scss/main.scss'],
 
     output: {
         filename: 'js/[name].min.js',
@@ -23,9 +23,9 @@ module.exports = {
             {
                 use: {
                     loader:'babel-loader',
-                    options: { presets: ['es2015'] }
+                    options: { presets: ['env','es2015', 'stage-0','react'] }
                 },
-                test: /(\.js|\.es6)$/,
+                test: /(\.js|\.es6|\.jsx)$/,
                 exclude: /node_modules/
             }
             ]
@@ -37,6 +37,10 @@ module.exports = {
             // both options are optional
             filename: "css/[name].css",
             chunkFilename: "[id].css"
+        },
+        "transform-runtime", {
+        "polyfill": false,
+        "regenerator": true
         })
     ],
     devtool: "source-map",
