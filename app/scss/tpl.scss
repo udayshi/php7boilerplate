@@ -3,7 +3,7 @@
 /*NOTE: use colon : to assign variable*/
 
 /*var example*/
-$env='dev';
+$env:'dev';
 $var_color_scss:red;
 $var_trasparent_color:rgba($var_color_scss,.7);
 $var_darken_color:darken($var_color_scss,10%);
@@ -31,10 +31,15 @@ $var_calculated_width:300px / 960px * 100%;
 
 
 /*Mixins or Function*/
+
 @mixin mixin_tpl($arg) {
     font-size:$arg;
     font-weight: bold;
 }
+@mixin mixin_media_query($max_width,$min_width,$orientation:landscape){
+  @media only screen and (max-width: $max_width) and (min-width: $min_width) and (orientation: $orientation) { @content; }
+}
+
 /*Shared Selector and Property  Extend/Inheritance */
 %shared-property {
     border: 1px solid #ccc;
@@ -56,10 +61,15 @@ ul{
 
     /*Will include fontsize on param and makes font bold*/
     @include mixin_tpl(10);
+    /*Mobile*/
+    @include mixin_media_query(360px,460px,'portrait'){
+      font-color:red;
+    }
+
     @extend %shared-property;
     @extend %shared-selector;
     a{
-      &:hover{
+      &:hover,&:visited{
         text-decoration: none;
       }
     }
