@@ -4,7 +4,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 export TERM="xterm-256color"
 export HISTCONTROL=ignoredups
 export PATH=$PATH:~/bin
-`dinghy env`
+#`dinghy env`
 source ~/.bash_alias
 
 # Setting PATH for Python 3.6
