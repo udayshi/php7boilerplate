@@ -2,19 +2,22 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 class DumbComp extends React.Component {
     reportParent(e){
-
-        this.props.cb(this.props.data.name)
+        this.props.cb(this.props.data.name);
     }
+
     render=()=> <li onClick={this.reportParent.bind(this)}>{this.props.data.name} - {this.props.data.age} </li>
 }
+
 class HelloWorld extends React.Component {
     constructor(props){
         super(props);
         this.state={child_v:'',total_clicked:0,data:[]};
     }
+
     getName(){
         return 'Uday Shiwakoti';
     }
+
     componentDidMount() {
 
         fetch('https://reqres.in/api/users')
@@ -30,21 +33,26 @@ class HelloWorld extends React.Component {
         console.log('hook runs after the component output has been rendered to the DOM');
 
     }
+
     componentWillReceiveProps(nextProps){
         console.log('When date is loaded on parent and passed it again after mounted.')
     }
+
     componentWillUnmount() {
         console.log('Will do the cleanup when this component is unmounted.')
     }
+
     handleClick(e){
         e.preventDefault();
         //pass the object only
         this.setState({'total_clicked':this.state.total_clicked+1});
 
     }
+
     childRead(v){
         this.setState({child_v:'Clicked Value:'+v})
     }
+
     render() {
         let data=[]
         data.push({name:'uday',age:40});
