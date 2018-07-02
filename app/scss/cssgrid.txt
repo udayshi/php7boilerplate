@@ -1,0 +1,14 @@
+CSS Grid
+------------
+.container{
+    display:grid;
+    grid-template-columns:200px 150px 20% 1fr auto;
+    grid-template-rows:5rem 2.5rem minmax(10px,200px);
+
+}
+.container column{
+    grid-column-start:3;
+    grid-column-start:5;
+    grid-row-start:1;
+    girid-row-end:3;
+}

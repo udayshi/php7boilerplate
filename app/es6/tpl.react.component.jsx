@@ -5,7 +5,19 @@ class DumbComp extends React.Component {
         this.props.cb(this.props.name);
     }
 
-    render=()=> <li onClick={this.reportParent.bind(this)}>{this.props.name} - {this.props.age} </li>
+    render=()=> <li onClick={this.reportParent.bind(this)} className="list-group-item">{this.props.name} - {this.props.age} </li>
+}
+class BootstrapModal extends React.Component {
+
+    render=()=> {
+        return (
+           <div className="modal">
+               <div className="modal-dialog">
+
+               </div>
+           </div>
+        );
+    }
 }
 
 class HelloWorld extends React.Component {
@@ -30,10 +42,13 @@ class HelloWorld extends React.Component {
             }.bind(this));
 
 
-        console.log('hook runs after the component output has been rendered to the DOM');
+        console.log('hook componentDidMount runs after the component output has been rendered to the DOM');
 
     }
+    componentWillMount(){
+        console.log('Hook componentWillMount runs before the component output has been rendered to the DOM.')
 
+    }
     componentWillReceiveProps(nextProps){
         console.log('When date is loaded on parent and passed it again after mounted.')
     }
@@ -62,19 +77,22 @@ class HelloWorld extends React.Component {
         //spread passing
         const fm=data.map((r,i)=><DumbComp key={'fm_'+i} {...r} cb={this.childRead.bind(this)}/>)
 
-        const json_out=this.state.data.map((r,i)=><li key={'json_out_'+i} >{r.first_name} - {r.last_name}</li>)
+        const json_out=this.state.data.map((r,i)=><li key={'json_out_'+i} className="list-group-item" >{r.first_name} - {r.last_name}</li>)
         return (
             <div>
+                <h3>React Quick Demo</h3>
                 Hello, <i>{this.getName()}</i>!<br/>
                 and you have passed property value <i>{this.props.whoami}</i><br/>
                 and clicked <i>{this.state.total_clicked}</i><br/>
-                <ul>{fm}</ul>
+                <ul className="list-group">{fm}</ul>
                 <br/>
                 {this.state.child_v}<br/>
-
+                <ul className="list-group">
                 {json_out}
+                </ul>
 
-                <button onClick={this.handleClick.bind(this)}>Click Me</button>
+                <button onClick={this.handleClick.bind(this)} className="btn btn-default">Click Me</button>
+                <BootstrapModal/>
             </div>
         );
     }
@@ -87,3 +105,4 @@ ReactDOM.render(
     <HelloWorld whoami="Programmer"/>,
     document.getElementById('applet_content')
 );
+/*Routing missing*/

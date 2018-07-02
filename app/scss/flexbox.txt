@@ -1,1 +1,34 @@
-display:flex; /*
+#Flex Container
+.flex_container{
+                    display:flex;
+                            inline-flex;
+
+                    flex-wrap:wrap;
+                              no-wrap;
+                              wrap-reverse;
+                    flex-direction:row;
+                                   column;
+                                   row-reverse;
+                                   column-reverse;
+                    flex-flow:
+
+                    align-content:
+                    align-items:
+
+                    /*
+                    flex-flow: row wrap
+                    */
+                    align-items: stretch;
+                                 center;
+                                 flex-start;
+                                 flex-end;
+                    justify-content:
+
+                }
+
+#Flex Items or Child which sits under Flex container
+.flex_container .items{
+                        order:
+                        flex:
+                        align-self:
+                      }

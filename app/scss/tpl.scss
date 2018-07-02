@@ -4,7 +4,7 @@
 
 /*var example*/
 $env:'dev';
-$var_color_scss:red;
+$var_color_scss:black;
 $var_trasparent_color:rgba($var_color_scss,.7);
 $var_darken_color:darken($var_color_scss,10%);
 $var_lighten_color:lighten($var_color_scss,10%);
@@ -72,9 +72,34 @@ ul{
       &:hover,&:visited{
         text-decoration: none;
       }
+
     }
+    cursor: pointer;
+
   }
 
 }
 
+/**
+CHEAT SHEET FOR SELECTOR
+#https://www.w3schools.com/cssref/css_selectors.asp
+div + p  => [Only select paragraph 1 p only]
+div ~ p  => [Will select both p on lvl_1 only]
+        <div>
+          <p class='lvl_1'>Paragraph 1
+              <p class="lvl_2">Paragraph desc</p>
+          </p>
+          <p class='lvl_1'>Paragraph 2
+            <p class="lvl_2">Paragraph desc</p>
+          </p>
 
+        </div>
+
+
+
+a[href^="https"] => select the links with https
+a[href$=".pdf"] => select the link which is pdf
+a[href*="usforweb" i] => select the link which got content of usforweb
+button[type="submit"] => select all the submit button
+
+*/

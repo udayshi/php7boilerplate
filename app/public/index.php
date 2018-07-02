@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="applet_content">
+
+    <div id="class_test" class="container btn-default test"></div>
+    <div id="applet_content" class="container">
 
     </div>
 </body>

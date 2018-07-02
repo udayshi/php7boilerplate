@@ -1,30 +1,4 @@
-
-let data=[
-    {name:'uday' ,age:40,location:'Siphal',dob:'1998-07-20',child:{active:'Y','total_child':2}},
-    {name:'uday' ,age:20,location:'Anamnagar',dob:'1998-07-23'},
-    {name:'uday' ,age:35,location:'Bnamnagar',dob:'1998-06-23'},
-    {name:'aradhya' ,age:15,location:'cnamnagar',dob:'1998-08-23'},
-    {name:'uday' ,age:15,location:'cnamnagar',dob:'1998-08-23'},
-    {name:'sabita' ,age:30,location:'Siphal',dob:'2000-03-23'},
-]
-
-
-class USUtil{
-    reset(){
-        this._data=[];       
-        this._columns=[];
-        this._pickcol=[];
-        this._aggcol=[];
-        this._where=[];
-        this._order=[];
-        this._having=[];
-        this._must_fields=new Set();
- 
-    }
-
-
-
-
+class SplitClass {
     constructor() {
         this.reset();
     }
@@ -88,14 +62,14 @@ class USUtil{
         let order=field.split(',')
         order.forEach(r=>{
             let tmp=r.split(' ');
-        let type=typeof tmp[1]=='undefined'?'asc':tmp[1].toLowerCase().trim();
+            let type=typeof tmp[1]=='undefined'?'asc':tmp[1].toLowerCase().trim();
 
 
-        if(type!='asc' && type!='desc')
-            type='asc'
+            if(type!='asc' && type!='desc')
+                type='asc'
 
-        this._order.push({k:tmp[0].trim(),direction:type});
-    });
+            this._order.push({k:tmp[0].trim(),direction:type});
+        });
 
         return this;
     }
@@ -158,46 +132,46 @@ class USUtil{
 
         if(this._where.length>0) {
             output = output.filter(row => {
-                    let total_found=0;
-            this._where.forEach(cond => {
-                let cv=cond.v;
+                                let total_found=0;
+                                this._where.forEach(cond => {
+                                    let cv=cond.v;
 
 
-            let rv=this.getStructData(cond.field_name,row).val;
+                                    let rv=this.getStructData(cond.field_name,row).val;
 
-            if(rv=='')
-                rv='';
-            if(cv=='')
-                cv='';
+                                    if(rv=='')
+                                        rv='';
+                                    if(cv=='')
+                                        cv='';
 
-            if(cond.oper=='=' || cond.oper=='like'){
-                cv=cv.trim().toUpperCase();
-                rv=rv.trim().toUpperCase();
-            }if(cond.oper=='<' ||cond.oper=='>' || cond.oper=='>=' ||cond.oper=='<='){
-                cv=isNaN(parseFloat(cv))?0:parseFloat(cv);
-                rv=isNaN(parseFloat(rv))?0:parseFloat(rv);
-            }
-            if(cond.oper=='=' && cv==rv)
-                total_found++;
-            else if(cond.oper=='<' && rv<cv)
-                total_found++;
-            else if(cond.oper=='>' && rv>cv)
-                total_found++;
-            else if(cond.oper=='>=' && rv>=cv)
-                total_found++;
-            else if(cond.oper=='<=' && rv<=cv)
-                total_found++;
-            else if(cond.oper=='like' && rv.search(cv)>=0){
-                total_found++;
-            }
+                                    if(cond.oper=='=' || cond.oper=='like'){
+                                        cv=cv.trim().toUpperCase();
+                                        rv=rv.trim().toUpperCase();
+                                    }if(cond.oper=='<' ||cond.oper=='>' || cond.oper=='>=' ||cond.oper=='<='){
+                                        cv=isNaN(parseFloat(cv))?0:parseFloat(cv);
+                                        rv=isNaN(parseFloat(rv))?0:parseFloat(rv);
+                                    }
+                                    if(cond.oper=='=' && cv==rv)
+                                        total_found++;
+                                    else if(cond.oper=='<' && rv<cv)
+                                        total_found++;
+                                    else if(cond.oper=='>' && rv>cv)
+                                        total_found++;
+                                    else if(cond.oper=='>=' && rv>=cv)
+                                        total_found++;
+                                    else if(cond.oper=='<=' && rv<=cv)
+                                        total_found++;
+                                    else if(cond.oper=='like' && rv.search(cv)>=0){
+                                        total_found++;
+                                    }
 
-        });
-            return total_found==this._where.length;
-        });
+                                });
+                            return total_found==this._where.length;
+                    });
 
-
-
-
+            
+            
+            
             this._data=output;
         }
     }
@@ -206,14 +180,14 @@ class USUtil{
         if(this._columns!='*'){
             this._columns.forEach(r=>{
                 this._must_fields.add(r.field_name);
-        });
+            });
 
             this._where.forEach(r=>{
                 this._must_fields.add(r.field_name);
-        });
+            });
             this._having.forEach(r=>{
                 this._must_fields.add(r.field_name);
-        });
+            });
             //this._must_fields=Array.from(this._must_fields);
             this._must_fields=[...this._must_fields];
         }
@@ -232,7 +206,7 @@ class USUtil{
         }
 
         if(tmp.length>1 && typeof current_value=='object' && current_value.hasOwnProperty(tmp[1])){
-            let lvl_1_key=tmp[1];
+           let lvl_1_key=tmp[1];
             output[tmp[0]][lvl_1_key]=current_value[lvl_1_key];
             current_value=current_value[lvl_1_key];
 
@@ -271,66 +245,66 @@ class USUtil{
         let output=[];
         this._data.forEach(row=>{
             let selected_row={};
-        this._columns.forEach(col=>{
-            let tmp=col.field_name.split('.');
-        selected_row[tmp[0]]=row[tmp[0]];
-    });
-        output.push(selected_row);
-    });
+            this._columns.forEach(col=>{
+                    let tmp=col.field_name.split('.');
+                    selected_row[tmp[0]]=row[tmp[0]];
+            });
+            output.push(selected_row);
+        });
         this._data=output;
     }
     _aggregate(){
         let output={}
         this._columns.forEach(ck=>{
             if(ck.method==''){
-            this._pickcol.push(ck);
-        }else{
-            this._aggcol.push(ck);
-        }
-    });
+                this._pickcol.push(ck);
+            }else{
+                this._aggcol.push(ck);
+            }
+        });
         this._data.forEach(row=>{
             let k='';
-        this._pickcol.forEach(ck=>{
-            k+=row[ck.field_name];
-    });
-        if(!output.hasOwnProperty(k)){
-            output[k]=row;
-        }
+            this._pickcol.forEach(ck=>{
+                    k+=row[ck.field_name];
+            });
+            if(!output.hasOwnProperty(k)){
+                output[k]=row;
+            }
 
 
 
-        this._aggcol.forEach(ck=>{
-            let ag_k=ck.method+'_'+ck.field_name;
+            this._aggcol.forEach(ck=>{
+                let ag_k=ck.method+'_'+ck.field_name;
 
-        if(!output[k].hasOwnProperty(ag_k))
-            output[k][ag_k]=[];
+               if(!output[k].hasOwnProperty(ag_k))
+                    output[k][ag_k]=[];
 
-        output[k][ag_k].push(row[ck.field_name]);
+                output[k][ag_k].push(row[ck.field_name]);
 
-    });
+            });
 
-    });
-
+        });
+        
         this._data=[];
 
         for(let row_k in output){
             let row=output[row_k];
             this._aggcol.forEach(ck=>{
                 let ag_k=ck.method+'_'+ck.field_name;
-            if(ck.method=='max'){
-                row[ag_k]=Math.max(...row[ag_k]);
-            }else if(ck.method=='min'){
-                row[ag_k]=Math.min(...row[ag_k]);
-            }else if(ck.method=='count'){
-                row[ag_k]=row[ag_k].length;
-            }else if(ck.method=='sum'){
-                row[ag_k]=row[ag_k].reduce((a,b)=>a+b,0);
-            }else if(ck.method=='avg'){
-                row[ag_k]=row[ag_k].reduce((a,b)=>a+b,0)/row[ag_k].length;
-            }else{
-                row[ag_k]=0;
-            }
-        });
+                if(ck.method=='max'){
+                    row[ag_k]=Math.max(...row[ag_k]);
+                }else if(ck.method=='min'){
+                    row[ag_k]=Math.min(...row[ag_k]);
+                }else if(ck.method=='count'){
+                    row[ag_k]=row[ag_k].length;
+                }else if(ck.method=='sum'){
+                    row[ag_k]=row[ag_k].reduce((a,b)=>a+b,0);
+                }else if(ck.method=='avg'){
+                    row[ag_k]=row[ag_k].reduce((a,b)=>a+b,0)/row[ag_k].length;
+                }else{
+                    row[ag_k]=0;
+                }
+            });
             this._data.push(row);
         }
         console.log(this._data);
@@ -345,17 +319,5 @@ class USUtil{
     }
 
 
-
 }
-let objUtil=new USUtil();
-//console.log(objUtil.getHaving('xml(name)'));
-//let search_data=objUtil.select('name as full_name.age,count(info.age.name) as age');
-
-
-let search_data=objUtil.select('location,count(location)')
-                       .from(data)
-                        .fetch();
-
-                    
-
-
+export default SplitClass;

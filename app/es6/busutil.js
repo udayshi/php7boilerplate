@@ -36,8 +36,9 @@ class USUtil{
         this.order.push({k:k,direction:type});
         return this;
     }
-    getSelectedColumn(data){
-        return data.map(r=>{
+    _setColumns(){
+
+        this.data=this.data.map(r=>{
                          let selected_fields={};
                         if(this.columns=='*')
                             selected_fields=r;
@@ -52,11 +53,12 @@ class USUtil{
                         }
                 return selected_fields;
             });
-    }
-    getFilterData(data){
 
+        return this;
     }
-    getOrderBy(data){
+
+    _setOrderBy(){
+        let data=this.data;
         if(this.order.length>0){
             data=data.sort((r_a,r_b)=>{
 
@@ -85,10 +87,11 @@ class USUtil{
 
         })
         }
-        return data;
+        this.data=data;
+        return this;
 
     }
-    getFilterData(){
+    _setFilterData(){
         let output=this.data;
         output=output.filter(row=>{
                 let found=false;
@@ -146,26 +149,26 @@ class USUtil{
 
                     return total_found==this.contition.length;
             });
-        return output;
+        this.data=output;
+        return this;
     }
     fetch(){
 
-
-        let output=this.getFilterData();
-        output=this.getSelectedColumn(output);
-        output=this.getOrderBy(output);
-        //Implement order by
+        this._setFilterData()
+            ._setColumns()
+            _setOrderBy();
 
 
 
-        return output;
+
+        return this.data;
     }
 
 
 }
 let objUtil=new USUtil();
 
-let search_data=objUtil.select('name')
+let search_data=objUtil.select('name,age')
                         .from(data)
                         /*.where('age','>','20')
                         .where('name','like','uday')
@@ -173,6 +176,6 @@ let search_data=objUtil.select('name')
                         .orderby('name','desc')
 
                         .fetch();
-console.log(search_data);
+//console.log(search_data);
 
 
