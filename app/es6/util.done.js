@@ -94,12 +94,12 @@ class SplitClass {
 
     _setOrderBy(){
         let data=this._data;
-        if(this.order.length>0){
+        if(this._order.length>0){
             data=data.sort((r_a,r_b)=>{
 
-                    for(let i=0;i<this.order.length;i++)
+                    for(let i=0;i<this._order.length;i++)
             {
-                let order=this.order[i];
+                let order=this._order[i];
                 let or_a = r_a[order.k];
                 let or_b = r_b[order.k];
                 if (or_a == '')

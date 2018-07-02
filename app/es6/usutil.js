@@ -120,12 +120,12 @@ class USUtil{
 
     _setOrderBy(){
         let data=this._data;
-        if(this.order.length>0){
+        if(this._order.length>0){
             data=data.sort((r_a,r_b)=>{
 
-                    for(let i=0;i<this.order.length;i++)
+                    for(let i=0;i<this._order.length;i++)
             {
-                let order=this.order[i];
+                let order=this._order[i];
                 let or_a = r_a[order.k];
                 let or_b = r_b[order.k];
                 if (or_a == '')
@@ -333,7 +333,7 @@ class USUtil{
         });
             this._data.push(row);
         }
-        console.log(this._data);
+
 
     }
     fetch(){
@@ -341,7 +341,8 @@ class USUtil{
         this._setFilterData();
         this._pickSelectedColumn();
         this._aggregate();
-
+        this._setOrderBy();
+        return this._data;
     }
 
 
@@ -354,8 +355,10 @@ let objUtil=new USUtil();
 
 let search_data=objUtil.select('location,count(location)')
                        .from(data)
+    .orderby('location asc')
                         .fetch();
 
+console.log(search_data);
                     
 
 
